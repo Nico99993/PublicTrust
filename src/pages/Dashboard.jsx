@@ -22,9 +22,8 @@ const Dashboard = () => {
   const { currentUser, userRole } = useAuth();
   const navigate = useNavigate();
 
-  const handleActionClick = () => {
-    navigate('/invoices');
-  };
+  const handleCreateClick = () => navigate('/invoices/new');
+  const handleViewClick = () => navigate('/invoices');
 
   return (
     <div className="dashboard-page container page-container">
@@ -37,12 +36,12 @@ const Dashboard = () => {
         
         <div>
           {userRole === 'seller' && (
-            <Button onClick={handleActionClick}>
+            <Button onClick={handleCreateClick}>
               <Plus size={18} /> Create Invoice
             </Button>
           )}
           {userRole === 'buyer' && (
-            <Button onClick={handleActionClick} variant="secondary">
+            <Button onClick={handleViewClick} variant="secondary">
               <Eye size={18} /> View Invoices
             </Button>
           )}

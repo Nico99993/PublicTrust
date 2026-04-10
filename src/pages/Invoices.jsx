@@ -3,10 +3,12 @@ import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { Badge } from '../components/Badge';
 import { Plus, Search, Filter, MoreHorizontal } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import './Invoices.css';
 
 const Invoices = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   return (
     <div className="invoices-page container page-container">
@@ -15,7 +17,7 @@ const Invoices = () => {
           <h2>Invoices</h2>
           <p>Manage, track, and create your B2B invoices.</p>
         </div>
-        <Button>
+        <Button onClick={() => navigate('/invoices/new')}>
           <Plus size={18} /> New Invoice
         </Button>
       </div>

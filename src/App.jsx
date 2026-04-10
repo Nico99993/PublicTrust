@@ -13,6 +13,7 @@ const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Invoices = lazy(() => import('./pages/Invoices'));
 const GstReports = lazy(() => import('./pages/GstReports'));
 const Auth = lazy(() => import('./pages/Auth'));
+const CreateInvoice = lazy(() => import('./pages/CreateInvoice'));
 
 function App() {
   return (
@@ -39,6 +40,14 @@ function App() {
                   element={
                     <ProtectedRoute>
                       <Invoices />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="invoices/new" 
+                  element={
+                    <ProtectedRoute>
+                      <CreateInvoice />
                     </ProtectedRoute>
                   } 
                 />

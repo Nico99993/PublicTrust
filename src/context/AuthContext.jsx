@@ -18,18 +18,28 @@ export const AuthProvider = ({ children }) => {
   const [userRole, setUserRole] = useState(null); // 'buyer' or 'seller'
   const [loading, setLoading] = useState(true);
 
+  // Helper for Firestore timeouts to prevent Firebase's infinite retry from freezing the app
+  const withTimeout = (promise, ms) => {
+    return Promise.race([
+      promise,
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Firestore request timed out')), ms))
+    ]);
+  };
+
   // 1. Signup Function
-  // We first create the user in Firebase Auth, then explicitly store their role in Firestore
   const signup = async (email, password, role) => {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
     
-    // Save user profile metadata (role) to Firestore in a "users" collection
-    await setDoc(doc(db, 'users', user.uid), {
-      email: user.email,
-      role: role,
-      createdAt: new Date()
-    });
+    try {
+      await withTimeout(setDoc(doc(db, 'users', user.uid), {
+        email: user.email,
+        role: role,
+        createdAt: new Date()
+      }), 5000);
+    } catch (err) {
+      console.warn("Could not save role to Firestore, database might be disabled:", err);
+    }
 
     return user;
   };
@@ -52,7 +62,7 @@ export const AuthProvider = ({ children }) => {
       // If a user successfully logged in, grab their role from Firestore so UI knows what to render
       if (user) {
         try {
-          const userDoc = await getDoc(doc(db, 'users', user.uid));
+          const userDoc = await withTimeout(getDoc(doc(db, 'users', user.uid)), 5000);
           if (userDoc.exists()) {
             setUserRole(userDoc.data().role);
           } else {
@@ -60,7 +70,7 @@ export const AuthProvider = ({ children }) => {
             setUserRole(null);
           }
         } catch (error) {
-          console.error("Error fetching user role:", error);
+          console.error("Error fetching user role (database likely disabled):", error);
           setUserRole(null);
         }
       } else {
