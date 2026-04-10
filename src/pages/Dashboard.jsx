@@ -1,8 +1,11 @@
 import React from 'react';
 import { Card } from '../components/Card';
 import { Badge } from '../components/Badge';
-import { Send, Download, Clock, DollarSign } from 'lucide-react';
+import { Button } from '../components/Button';
+import { Send, Download, Clock, DollarSign, Plus, Eye } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 
 const data = [
@@ -16,11 +19,34 @@ const data = [
 ];
 
 const Dashboard = () => {
+  const { currentUser, userRole } = useAuth();
+  const navigate = useNavigate();
+
+  const handleActionClick = () => {
+    navigate('/invoices');
+  };
+
   return (
     <div className="dashboard-page container page-container">
-      <div className="page-header">
-        <h2>Dashboard Overview</h2>
-        <p>Welcome back! Here's what's happening with your invoices today.</p>
+      <div className="page-header d-flex justify-between align-center">
+        <div>
+          <h2>Dashboard Overview</h2>
+          <p>Welcome back, {currentUser?.email || 'User'}! Here's what's happening with your invoices today.</p>
+          {userRole && <Badge variant={userRole === 'seller' ? 'primary' : 'success'} className="mt-2" style={{marginTop: '0.5rem'}}>Role: {userRole.toUpperCase()}</Badge>}
+        </div>
+        
+        <div>
+          {userRole === 'seller' && (
+            <Button onClick={handleActionClick}>
+              <Plus size={18} /> Create Invoice
+            </Button>
+          )}
+          {userRole === 'buyer' && (
+            <Button onClick={handleActionClick} variant="secondary">
+              <Eye size={18} /> View Invoices
+            </Button>
+          )}
+        </div>
       </div>
 
       <div className="overview-cards">
