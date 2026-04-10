@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PublicFunds — East Singhbhum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --ink-2: #3a3833;
+    --ink-3: #7a7770;
+    --ink-4: #b8b4ac;
+    --paper: #f5f2ec;
+    --paper-2: #ede9e1;
+    --paper-3: #e4dfd5;
+    --accent: #c84b2f;
+    --accent-2: #e86240;
+    --accent-light: #faeee9;
+    --green: #1a6b47;
+    --green-light: #e4f2eb;
+    --amber: #b56a10;
+    --amber-light: #fdf0dc;
+    --blue: #1a4f8a;
+    --blue-light: #e8f0fb;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --r: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    height: 60px;
+    background: var(--ink);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    gap: 32px;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 19px;
+    color: var(--paper);
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .nav-logo-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent-2);
+  }
+  .nav-links {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+    align-items: center;
+  }
+  .nav-link {
+    font-size: 13px;
+    color: var(--ink-4);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: color 0.15s, background 0.15s;
+    text-decoration: none;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+  .nav-link:hover { color: var(--paper); background: rgba(255,255,255,0.08); }
+  .nav-link.active { color: var(--paper); font-weight: 500; }
+  .nav-cta {
+    background: var(--accent);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    margin-left: 8px;
+    transition: background 0.15s;
+    letter-spacing: 0.01em;
+  }
+  .nav-cta:hover { background: var(--accent-2); }
+
+  /* LOCATION BAR */
+  .location-bar {
+    background: var(--paper-2);
+    border-bottom: 1px solid var(--paper-3);
+    padding: 10px 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .location-chip {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--paper);
+    border: 1px solid var(--paper-3);
+    border-radius: 20px;
+    padding: 3px 10px 3px 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .location-chip:hover { border-color: var(--ink-4); }
+  .loc-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .fy-badge {
+    margin-left: auto;
+    font-size: 11px;
+    background: var(--amber-light);
+    color: var(--amber);
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-weight: 500;
+  }
+  .live-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  /* HERO */
+  .hero {
+    padding: 52px 32px 44px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: start;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: 46px;
+    line-height: 1.08;
+    letter-spacing: -0.5px;
+    color: var(--ink);
+    margin-bottom: 16px;
+    max-width: 520px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--ink-3);
+    max-width: 440px;
+    line-height: 1.65;
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 11px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: background 0.15s;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary:hover { background: var(--ink-2); }
+  .btn-ghost {
+    background: none;
+    color: var(--ink-2);
+    border: 1px solid var(--paper-3);
+    padding: 11px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .btn-ghost:hover { border-color: var(--ink-4); background: var(--paper-2); }
+
+  /* HERO STATS COLUMN */
+  .hero-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 220px;
+    padding-top: 8px;
+  }
+  .hstat {
+    background: var(--paper);
+    border: 1px solid var(--paper-3);
+    border-radius: var(--r);
+    padding: 16px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hstat::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    border-radius: 3px 0 0 3px;
+  }
+  .hstat.c-red::before { background: var(--accent); }
+  .hstat.c-green::before { background: var(--green); }
+  .hstat.c-amber::before { background: var(--amber); }
+  .hstat.c-blue::before { background: var(--blue); }
+  .hstat-num { font-family: var(--serif); font-size: 26px; color: var(--ink); line-height: 1; }
+  .hstat-num.red { color: var(--accent); }
+  .hstat-num.green { color: var(--green); }
+  .hstat-num.amber { color: var(--amber); }
+  .hstat-label { font-size: 12px; color: var(--ink-3); margin-top: 3px; font-weight: 400; }
+
+  /* ALERT */
+  .alert-wrap { padding: 0 32px; max-width: 1100px; margin: 0 auto 32px; }
+  .alert {
+    background: #fff9f7;
+    border: 1px solid #f5c4b3;
+    border-radius: var(--r);
+    padding: 14px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .alert-icon {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .alert-text { font-size: 13px; color: #712B13; line-height: 1.5; }
+  .alert-link { color: var(--accent); font-weight: 500; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+
+  /* SECTION */
+  .section { padding: 0 32px 40px; max-width: 1100px; margin: 0 auto; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--ink);
+    letter-spacing: -0.2px;
+  }
+  .section-count {
+    font-size: 12px;
+    color: var(--ink-4);
+    font-weight: 400;
+  }
+  .section-link {
+    margin-left: auto;
+    font-size: 13px;
+    color: var(--accent);
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .section-link:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--paper-3);
+    margin: 0 32px 32px;
+    max-width: 1036px;
+  }
+
+  /* PROJECT CARDS */
+  .proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+  .proj-card {
+    background: #fff;
+    border: 1px solid var(--paper-3);
+    border-radius: var(--r);
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: border-color 0.15s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .proj-card:hover { border-color: var(--ink-4); transform: translateY(-1px); }
+  .proj-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    gap: 8px;
+  }
+  .proj-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .status-pill {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .s-ongoing { background: var(--blue-light); color: var(--blue); }
+  .s-delayed { background: var(--amber-light); color: var(--amber); }
+  .s-completed { background: var(--green-light); color: var(--green); }
+  .s-flagged { background: var(--accent-light); color: var(--accent); }
+  .proj-dept { font-size: 12px; color: var(--ink-3); margin-bottom: 14px; }
+  .proj-bbar-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-3); margin-bottom: 5px; }
+  .proj-bbar-track {
+    height: 4px;
+    background: var(--paper-2);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .proj-bbar-fill { height: 100%; border-radius: 2px; }
+  .proj-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--ink-3);
+    padding-top: 10px;
+    border-top: 1px solid var(--paper-2);
+  }
+  .proj-foot-stars { color: var(--amber); letter-spacing: 1px; }
+  .proj-foot-stars .grey { color: var(--paper-3); }
+  .distance-tag {
+    font-size: 10px;
+    background: var(--paper-2);
+    color: var(--ink-3);
+    padding: 2px 7px;
+    border-radius: 10px;
+  }
+  .near-badge {
+    position: absolute;
+    top: 0; right: 0;
+    background: var(--accent);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 0 var(--r) 0 var(--r);
+    text-transform: uppercase;
+  }
+
+  /* CONTRACTOR CARDS */
+  .contractor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+  .contractor-card {
+    background: #fff;
+    border: 1px solid var(--paper-3);
+    border-radius: var(--r);
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .contractor-card:hover { border-color: var(--ink-4); transform: translateY(-1px); }
+  .contractor-card.flagged { border-color: #f5c4b3; background: #fff9f7; }
+  .c-card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .c-avatar {
+    width: 44px; height: 44px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    flex-shrink: 0;
+    font-family: var(--serif);
+  }
+  .c-name { font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.3; }
+  .c-meta { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+  .c-rating-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  .c-stars { color: var(--amber); font-size: 13px; }
+  .c-stars .grey { color: var(--paper-3); }
+  .rating-num { font-size: 15px; font-weight: 500; color: var(--ink); }
+  .c-stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    padding-top: 12px;
+    border-top: 1px solid var(--paper-2);
+  }
+  .c-stat-item { font-size: 11px; color: var(--ink-3); }
+  .c-stat-val { font-size: 14px; font-weight: 500; color: var(--ink); display: block; margin-bottom: 1px; }
+  .c-stat-val.red { color: var(--accent); }
+  .c-stat-val.green { color: var(--green); }
+
+  /* SPENDING CHART */
+  .spending-section {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 36px 32px;
+    margin-bottom: 0;
+  }
+  .spending-inner { max-width: 1100px; margin: 0 auto; }
+  .spending-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--paper);
+    margin-bottom: 6px;
+  }
+  .spending-sub { font-size: 13px; color: var(--ink-4); margin-bottom: 28px; }
+  .dept-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+  .dept-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--r);
+    padding: 16px;
+    transition: border-color 0.15s;
+    cursor: pointer;
+  }
+  .dept-card:hover { border-color: rgba(255,255,255,0.25); }
+  .dept-name { font-size: 12px; color: var(--ink-4); margin-bottom: 10px; font-weight: 400; }
+  .dept-bar-track { height: 5px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin-bottom: 10px; }
+  .dept-bar-fill { height: 100%; border-radius: 3px; transition: width 0.8s ease; }
+  .dept-allocated { font-family: var(--serif); font-size: 20px; color: var(--paper); }
+  .dept-used { font-size: 11px; color: var(--ink-4); margin-top: 2px; }
+
+  /* RECENT REVIEWS */
+  .review-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+  .review-card {
+    background: #fff;
+    border: 1px solid var(--paper-3);
+    border-radius: var(--r);
+    padding: 18px 20px;
+  }
+  .rev-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+  .rev-project { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .rev-stars { color: var(--amber); font-size: 12px; }
+  .rev-stars .grey { color: var(--paper-3); }
+  .rev-body { font-size: 13px; color: var(--ink-2); line-height: 1.55; margin-bottom: 10px; font-weight: 300; }
+  .rev-footer { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--ink-4); }
+  .rev-badge {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+  .rev-verified { background: var(--green-light); color: var(--green); }
+  .rev-locality { background: var(--blue-light); color: var(--blue); }
+  .rev-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px; }
+  .rev-tag {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    background: var(--paper-2);
+    color: var(--ink-3);
+  }
+  .rev-tag.bad { background: var(--accent-light); color: var(--accent); }
+  .rev-tag.good { background: var(--green-light); color: var(--green); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: var(--ink-4);
+    padding: 28px 32px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-link { color: var(--ink-4); cursor: pointer; transition: color 0.15s; }
+  .footer-link:hover { color: var(--paper); }
+
+  /* ANIMATE IN */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.5s ease both; }
+  .fade-up:nth-child(1) { animation-delay: 0.05s; }
+  .fade-up:nth-child(2) { animation-delay: 0.12s; }
+  .fade-up:nth-child(3) { animation-delay: 0.19s; }
+  .fade-up:nth-child(4) { animation-delay: 0.26s; }
+  .fade-up:nth-child(5) { animation-delay: 0.33s; }
+
+  @media (max-width: 680px) {
+    nav { padding: 0 16px; }
+    .hero { grid-template-columns: 1fr; padding: 32px 16px 28px; gap: 28px; }
+    .hero-stats { flex-direction: row; flex-wrap: wrap; }
+    .hstat { min-width: calc(50% - 5px); }
+    .hero-title { font-size: 32px; }
+    .section, .alert-wrap, .divider { padding-left: 16px; padding-right: 16px; }
+    .divider { margin-left: 16px; margin-right: 16px; }
+    .spending-section { padding: 28px 16px; }
+    footer { padding: 20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    PublicFunds
+  </div>
+  <div class="nav-links">
+    <a class="nav-link active">Overview</a>
+    <a class="nav-link">Projects</a>
+    <a class="nav-link">Contractors</a>
+    <a class="nav-link">Tenders</a>
+    <a class="nav-link">Reports</a>
+    <button class="nav-cta">Submit Review</button>
+  </div>
+</nav>
+
+<!-- LOCATION BAR -->
+<div class="location-bar">
+  <div class="live-dot"></div>
+  <span>Live data</span>
+  <span style="color:var(--paper-3)">·</span>
+  <div class="location-chip">
+    <div class="loc-dot"></div>
+    East Singhbhum, Jharkhand
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="margin-left:2px;opacity:0.5"><path d="M2.5 4L5 6.5L7.5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <span>Updated 2 hrs ago</span>
+  <div class="fy-badge">FY 2025–26</div>
+</div>
+
+<!-- HERO -->
+<div style="max-width:1100px;margin:0 auto">
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">Government spending transparency</div>
+    <h1 class="hero-title">Your district's money,<br><em>made visible.</em></h1>
+    <p class="hero-sub">Track every rupee allocated for public projects in your district — roads, water, schools, health centres. See who's building what, how much is spent, and what your neighbours are saying.</p>
+    <div class="hero-actions">
+      <button class="btn-primary">Explore projects near me</button>
+      <button class="btn-ghost">View all contractors →</button>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat c-blue fade-up">
+      <div class="hstat-num">₹68.4 Cr</div>
+      <div class="hstat-label">Total allocated this FY</div>
+    </div>
+    <div class="hstat c-green fade-up">
+      <div class="hstat-num green">24</div>
+      <div class="hstat-label">Active projects</div>
+    </div>
+    <div class="hstat c-amber fade-up">
+      <div class="hstat-num amber">₹41.2 Cr</div>
+      <div class="hstat-label">Utilised so far (60%)</div>
+    </div>
+    <div class="hstat c-red fade-up">
+      <div class="hstat-num red">5 delayed · 3 flagged</div>
+      <div class="hstat-label">Needing attention</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ALERT -->
+<div class="alert-wrap">
+  <div class="alert">
+    <div class="alert-icon">!</div>
+    <div class="alert-text">
+      <strong>Accountability alert:</strong> 3 contractors with citizen ratings below 2.5 were awarded new tenders this month. Jindal Watertech (rated 2.1 ★ by 47 verified citizens) received a ₹4.2 Cr contract on 6 Apr. <span class="alert-link">View flagged contractors →</span>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS NEAR YOU -->
+<section class="section">
+  <div class="section-head">
+    <h2 class="section-title">Projects near you</h2>
+    <span class="section-count">within 10 km</span>
+    <a class="section-link">See all 24 projects →</a>
+  </div>
+  <div class="proj-grid">
+
+    <div class="proj-card fade-up">
+      <div class="near-badge">0.9 km</div>
+      <div class="proj-card-top">
+        <div class="proj-name">PHC Upgradation – 6 Centres</div>
+        <span class="status-pill s-ongoing">Ongoing</span>
+      </div>
+      <div class="proj-dept">Health · District-wide</div>
+      <div class="proj-bbar-labels"><span>₹3.4 Cr budget</span><span>53% utilised</span></div>
+      <div class="proj-bbar-track"><div class="proj-bbar-fill" style="width:53%;background:var(--blue)"></div></div>
+      <div class="proj-foot">
+        <span>Ravi Builders & Co.</span>
+        <span class="proj-foot-stars">★★★★<span class="grey">★</span></span>
+      </div>
+    </div>
+
+    <div class="proj-card fade-up">
+      <div class="proj-card-top">
+        <div class="proj-name">NH-33 Road Widening Phase 2</div>
+        <span class="status-pill s-ongoing">Ongoing</span>
+      </div>
+      <div class="proj-dept">Roads & Infrastructure · Gamharia–Adityapur</div>
+      <div class="proj-bbar-labels"><span>₹42 Cr budget</span><span>65% utilised</span></div>
+      <div class="proj-bbar-track"><div class="proj-bbar-fill" style="width:65%;background:var(--blue)"></div></div>
+      <div class="proj-foot">
+        <span>Ashoka Buildcon Ltd.</span>
+        <span class="proj-foot-stars">★★★<span class="grey">★★</span></span>
+      </div>
+    </div>
+
+    <div class="proj-card fade-up" style="border-color:#f5c4b3;background:#fff9f7">
+      <div class="proj-card-top">
+        <div class="proj-name">Boram Piped Water Supply</div>
+        <span class="status-pill s-delayed">Delayed</span>
+      </div>
+      <div class="proj-dept">Water & Sanitation · Boram Block, 12 villages</div>
+      <div class="proj-bbar-labels"><span>₹8.7 Cr budget</span><span style="color:var(--accent)">36% · 4 months overdue</span></div>
+      <div class="proj-bbar-track"><div class="proj-bbar-fill" style="width:36%;background:var(--accent)"></div></div>
+      <div class="proj-foot">
+        <span style="color:var(--accent)">Jindal Watertech · Flagged</span>
+        <span class="proj-foot-stars">★★<span class="grey">★★★</span></span>
+      </div>
+    </div>
+
+    <div class="proj-card fade-up">
+      <div class="proj-card-top">
+        <div class="proj-name">Smart Street Lighting – Jamshedpur</div>
+        <span class="status-pill s-ongoing">Ongoing</span>
+      </div>
+      <div class="proj-dept">Urban · 3,200 LED lights across city</div>
+      <div class="proj-bbar-labels"><span>₹2.8 Cr budget</span><span>34% utilised</span></div>
+      <div class="proj-bbar-track"><div class="proj-bbar-fill" style="width:34%;background:var(--blue)"></div></div>
+      <div class="proj-foot">
+        <span>Wipro Lighting Ltd.</span>
+        <span class="proj-foot-stars">★★★★<span class="grey">★</span></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SPENDING BY DEPARTMENT (DARK SECTION) -->
+<div class="spending-section">
+  <div class="spending-inner">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:6px">
+      <div>
+        <h2 class="spending-title">Budget by department</h2>
+        <p class="spending-sub">Allocated vs utilised · FY 2025–26 · East Singhbhum</p>
+      </div>
+      <div style="font-size:12px;color:rgba(245,242,236,0.4);display:flex;align-items:center;gap:12px;padding-top:6px">
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:3px;border-radius:2px;background:rgba(255,255,255,0.5);display:inline-block"></span>Allocated</span>
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:var(--accent-2);display:inline-block;opacity:0.8"></span>Utilised</span>
+      </div>
+    </div>
+    <div class="dept-grid">
+      <div class="dept-card">
+        <div class="dept-name">Roads & Infrastructure</div>
+        <div class="dept-bar-track"><div class="dept-bar-fill" style="width:65%;background:var(--accent-2);opacity:0.85"></div></div>
+        <div class="dept-allocated">₹28.4 Cr</div>
+        <div class="dept-used">₹18.4 Cr used · 65%</div>
+      </div>
+      <div class="dept-card">
+        <div class="dept-name">Water & Sanitation</div>
+        <div class="dept-bar-track"><div class="dept-bar-fill" style="width:36%;background:#EF9F27;opacity:0.85"></div></div>
+        <div class="dept-allocated">₹14.2 Cr</div>
+        <div class="dept-used" style="color:#EF9F27">₹5.1 Cr used · 36% ↓</div>
+      </div>
+      <div class="dept-card">
+        <div class="dept-name">Education</div>
+        <div class="dept-bar-track"><div class="dept-bar-fill" style="width:82%;background:#5DCAA5;opacity:0.85"></div></div>
+        <div class="dept-allocated">₹9.8 Cr</div>
+        <div class="dept-used" style="color:#5DCAA5">₹8.0 Cr used · 82% ✓</div>
+      </div>
+      <div class="dept-card">
+        <div class="dept-name">Health</div>
+        <div class="dept-bar-track"><div class="dept-bar-fill" style="width:53%;background:var(--accent-2);opacity:0.85"></div></div>
+        <div class="dept-allocated">₹7.6 Cr</div>
+        <div class="dept-used">₹4.0 Cr used · 53%</div>
+      </div>
+      <div class="dept-card">
+        <div class="dept-name">Urban Development</div>
+        <div class="dept-bar-track"><div class="dept-bar-fill" style="width:34%;background:var(--accent-2);opacity:0.85"></div></div>
+        <div class="dept-allocated">₹5.2 Cr</div>
+        <div class="dept-used">₹1.8 Cr used · 34%</div>
+      </div>
+      <div class="dept-card">
+        <div class="dept-name">Social Welfare</div>
+        <div class="dept-bar-track"><div class="dept-bar-fill" style="width:71%;background:#5DCAA5;opacity:0.85"></div></div>
+        <div class="dept-allocated">₹3.2 Cr</div>
+        <div class="dept-used" style="color:#5DCAA5">₹2.3 Cr used · 71%</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTRACTORS -->
+<section class="section" style="padding-top:36px">
+  <div class="section-head">
+    <h2 class="section-title">Contractor spotlight</h2>
+    <span class="section-count">rated by verified citizens</span>
+    <a class="section-link">Full registry →</a>
+  </div>
+  <div class="contractor-grid">
+
+    <div class="contractor-card flagged fade-up">
+      <div class="c-card-top">
+        <div class="c-avatar" style="background:var(--accent-light);color:var(--accent)">JW</div>
+        <div style="flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div class="c-name">Jindal Watertech Pvt. Ltd.</div>
+            <span class="status-pill s-flagged" style="font-size:9px">Flagged</span>
+          </div>
+          <div class="c-meta">Water & Sanitation · 2 active contracts</div>
+        </div>
+      </div>
+      <div class="c-rating-row">
+        <span class="c-stars">★★<span class="grey">★★★</span></span>
+        <span class="rating-num" style="color:var(--accent)">2.1</span>
+        <span>· 47 verified reviews</span>
+      </div>
+      <div class="c-stats-row">
+        <div class="c-stat-item"><span class="c-stat-val red">44%</span>on-time</div>
+        <div class="c-stat-item"><span class="c-stat-val">₹31 Cr</span>awarded</div>
+        <div class="c-stat-item"><span class="c-stat-val red">12</span>complaints</div>
+      </div>
+    </div>
+
+    <div class="contractor-card fade-up">
+      <div class="c-card-top">
+        <div class="c-avatar" style="background:var(--blue-light);color:var(--blue)">AB</div>
+        <div style="flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div class="c-name">Ashoka Buildcon Ltd.</div>
+            <span class="status-pill s-ongoing">Active</span>
+          </div>
+          <div class="c-meta">Roads & Infrastructure · 3 active contracts</div>
+        </div>
+      </div>
+      <div class="c-rating-row">
+        <span class="c-stars">★★★<span class="grey">★★</span></span>
+        <span class="rating-num">3.2</span>
+        <span>· 93 verified reviews</span>
+      </div>
+      <div class="c-stats-row">
+        <div class="c-stat-item"><span class="c-stat-val">70%</span>on-time</div>
+        <div class="c-stat-item"><span class="c-stat-val">₹84 Cr</span>awarded</div>
+        <div class="c-stat-item"><span class="c-stat-val amber" style="color:var(--amber)">4</span>complaints</div>
+      </div>
+    </div>
+
+    <div class="contractor-card fade-up">
+      <div class="c-card-top">
+        <div class="c-avatar" style="background:var(--green-light);color:var(--green)">RB</div>
+        <div style="flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div class="c-name">Ravi Builders & Co.</div>
+            <span class="status-pill s-completed">Trusted</span>
+          </div>
+          <div class="c-meta">Health & Civil Works · 1 active contract</div>
+        </div>
+      </div>
+      <div class="c-rating-row">
+        <span class="c-stars">★★★★<span class="grey">★</span></span>
+        <span class="rating-num" style="color:var(--green)">4.1</span>
+        <span>· 61 verified reviews</span>
+      </div>
+      <div class="c-stats-row">
+        <div class="c-stat-item"><span class="c-stat-val green">88%</span>on-time</div>
+        <div class="c-stat-item"><span class="c-stat-val">₹18 Cr</span>awarded</div>
+        <div class="c-stat-item"><span class="c-stat-val green">1</span>complaints</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- RECENT CITIZEN REVIEWS -->
+<section class="section">
+  <div class="section-head">
+    <h2 class="section-title">Recent citizen reviews</h2>
+    <span class="section-count">Aadhaar & locality verified</span>
+    <a class="section-link">All reviews →</a>
+  </div>
+  <div class="review-grid">
+
+    <div class="review-card fade-up">
+      <div class="rev-top">
+        <div class="rev-project">Boram Piped Water Supply</div>
+        <span class="rev-stars">★<span class="grey">★★★★</span></span>
+      </div>
+      <div style="font-size:11px;color:var(--ink-4);margin-bottom:10px">Ramesh Kumar · 2 days ago</div>
+      <p class="rev-body">"Water pipes in our village are still not connected 8 months after contract start. No workers seen on site for 3 weeks now."</p>
+      <div class="rev-tags">
+        <span class="rev-tag bad">abandoned work</span>
+        <span class="rev-tag bad">no workers on site</span>
+      </div>
+      <div class="rev-footer">
+        <span class="rev-badge rev-verified">Aadhaar verified · 1.0x weight</span>
+        <span>34 found helpful</span>
+      </div>
+    </div>
+
+    <div class="review-card fade-up">
+      <div class="rev-top">
+        <div class="rev-project">PHC Upgradation – 6 Centres</div>
+        <span class="rev-stars">★★★★★</span>
+      </div>
+      <div style="font-size:11px;color:var(--ink-4);margin-bottom:10px">Dr. Suresh Patel · 4 days ago</div>
+      <p class="rev-body">"PHC construction at Baharagora is ahead of schedule. Equipment installed and functional already. Contractor is responsive to concerns."</p>
+      <div class="rev-tags">
+        <span class="rev-tag good">ahead of schedule</span>
+        <span class="rev-tag good">quality work</span>
+      </div>
+      <div class="rev-footer">
+        <span class="rev-badge rev-verified">Aadhaar verified · 1.0x weight</span>
+        <span>44 found helpful</span>
+      </div>
+    </div>
+
+    <div class="review-card fade-up">
+      <div class="rev-top">
+        <div class="rev-project">NH-33 Road Widening</div>
+        <span class="rev-stars">★★<span class="grey">★★★</span></span>
+      </div>
+      <div style="font-size:11px;color:var(--ink-4);margin-bottom:10px">Vikram Rao · 1 week ago</div>
+      <p class="rev-body">"Dust and noise from construction unbearable. No safety barriers put up near the school on Sector 4 road. Children at risk."</p>
+      <div class="rev-tags">
+        <span class="rev-tag bad">safety concern</span>
+        <span class="rev-tag bad">no barriers</span>
+      </div>
+      <div class="rev-footer">
+        <span class="rev-badge rev-locality">Locality verified · 0.5x weight</span>
+        <span>27 found helpful</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div style="width:6px;height:6px;border-radius:50%;background:var(--accent-2)"></div>
+    PublicFunds
+  </div>
+  <span>A civic transparency initiative · Data sourced from district government portals</span>
+  <div class="footer-links">
+    <span class="footer-link">About</span>
+    <span class="footer-link">API</span>
+    <span class="footer-link">RTI Guide</span>
+    <span class="footer-link">Contact</span>
+  </div>
+</footer>
+
+</body>
+</html>
